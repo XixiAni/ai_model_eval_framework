@@ -1,14 +1,10 @@
-#读取 YAML 里的  expect  字段，自动做响应校验，实现：
- 
-#- code 断言（必须=0）
-
-#- 包含关键词（content 包含某段话）
-
-#- 字段存在性校验
 from typing import Dict, Any
 
 class ResponseAssertor:
-    """通用响应断言工具：读取YAML expect字段自动校验"""
+    """
+    通用响应断言工具：读取YAML expect字段自动校验
+    支持：code断言、返回内容关键词包含断言
+    """
     def __init__(self):
         self.assert_result = True
         self.assert_msg = "断言通过"
@@ -23,7 +19,7 @@ class ResponseAssertor:
         self.assert_result = True
         self.assert_msg = []
 
-        # 1. 断言code必须为0
+        # 1. 断言 code 必须为0
         exp_code = expect.get("code", 0)
         if response.get("code") != exp_code:
             self.assert_result = False

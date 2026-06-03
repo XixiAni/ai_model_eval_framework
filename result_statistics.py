@@ -1,4 +1,3 @@
-#批量评测统计
 from typing import List, Dict, Any
 
 class ResultStatistics:
@@ -14,7 +13,7 @@ class ResultStatistics:
         self.min_cost_ms = 0
 
     def calculate(self):
-        """执行全量统计"""
+        """执行全量统计，返回结构化统计字典"""
         if self.total == 0:
             return self.get_summary()
 
@@ -36,7 +35,7 @@ class ResultStatistics:
         return self.get_summary()
 
     def get_summary(self) -> Dict[str, Any]:
-        """获取统计汇总报告"""
+        """生成最终统计汇总报告"""
         pass_rate = round(self.success_count / self.total * 100, 2) if self.total > 0 else 0.0
         return {
             "总用例数": self.total,

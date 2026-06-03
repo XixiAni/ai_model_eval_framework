@@ -3,14 +3,14 @@
 case_list:
 
 # 字段说明：
-#  case_id ：用例唯一标识，用于日志、CSV报告标记；
-#  case_desc ：用例业务描述，方便区分场景；
-#  api_path ：接口短路径，和你 AiApiRequest.send_post 入参完全兼容；
-#  request_body ：直接传给 send_post(request_data=xxx)，无需二次转换；
-#  expect ：预留断言配置，后续开发断言工具直接复用。#配合assertion_tool.py实现自动断言,读取YAML里的expect字段，自动做响应校验，实现：
-#- code 断言（必须=0）
-#- 包含关键词（content 包含某段话）
-#- 字段存在性校验
+# case_id ：用例唯一标识，用于日志、CSV报告标记；
+# case_desc ：用例业务描述，方便区分场景；
+# api_path ：接口短路径，和你 AiApiRequest.send_post 入参完全兼容；
+# request_body ：直接传给 send_post(request_data=xxx)，无需二次转换；
+# expect ：预留断言配置，配合 assertion_tool.py 实现自动校验，实现：
+# code 断言（必须=0）
+# 包含关键词（content 包含某段话）
+# 字段存在性校验
 
 # 用例1：AI测试开发岗位介绍
 - case_id: AI_TEST_001
@@ -68,7 +68,6 @@ case_list:
   expect:
     code: 0
     contains: ["性能","稳定性","安全性"]
-
 # 用例5：Python日志调试作用
 - case_id: AI_TEST_005
   case_desc: 测试自动化框架中日志的作用
@@ -85,18 +84,18 @@ case_list:
     contains: ["日志","调试","问题定位"]
 
 #格式说明
-#1. 根节点固定：必须以  case_list:  开头，加载器只识别这个节点
+# 1. 根节点固定：必须以  case_list:  开头，加载器只识别这个节点
 
-#2. 必填字段（缺一不可，加载器会自动校验）
+# 2. 必填字段（缺一不可，加载器会自动校验）
 
-#-  case_id ：用例唯一编号
+# case_id ：用例唯一编号
 
-#-  case_desc ：用例描述
+# case_desc ：用例描述
 
-#-  api_path ：接口路径（和  main.py  中一致）
+# api_path ：接口路径（和  main.py  中一致）
 
-#-  request_body ：请求体参数（完全适配 DeepSeek 官方格式）
+# request_body ：请求体参数（完全适配 DeepSeek 官方格式）
 
-#3. YAML 缩进：必须用2个空格缩进，不能用Tab，否则解析报错
+# 3. YAML 缩进：必须用2个空格缩进，不能用Tab，否则解析报错
 
-#4. 直接运行：配置好  .env  文件中的  AI_API_KEY ，运行  main.py  即可批量执行5条用例，自动统计通过率
+# 4. 直接运行：配置好  .env  文件中的  AI_API_KEY ，运行  main.py  即可批量执行5条用例，自动统计通过率

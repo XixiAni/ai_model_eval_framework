@@ -1,13 +1,10 @@
 import os
-# 新增：加载本地.env文件密钥配置
+# 加载本地 .env 文件密钥配置
 from dotenv import load_dotenv
-# 1. 获取main.py完整绝对路径
+# # 通过自身绝对路径定位项目根目录下的 .env文件，不受终端工作目录影响
 current_script_abs_path = os.path.abspath(__file__)
-# 2. 提取main.py所在的项目文件夹路径
 current_dir = os.path.dirname(current_script_abs_path)
-# 3. 拼接出和main.py同级的.env文件完整路径
 env_path = os.path.join(current_dir, ".env")
-# 4. 强制指定路径加载.env文件，不再依赖终端目录
 load_dotenv(dotenv_path=env_path)
 
 from api_client_decoupling import AiApiRequest,YamlCaseLoader
@@ -20,15 +17,15 @@ if __name__ == "__main__":
     # model_api_key = "sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     # api_client = AiApiRequest(api_key=model_api_key, base_url="https://api.deepseek.com")
 
-    # ========== 模式2：新增安全方式，自动读取系统环境变量/.env文件的 AI_API_KEY ==========
+    # ========== 模式2：新增安全方式，自动读取系统环境变量 /.env 文件的 AI_API_KEY ==========
     # Windows临时设置环境变量命令（cmd）：set AI_API_KEY=sk-xxxxxxxxxxxx
     # Windows PowerShell临时设置：$env:AI_API_KEY="sk-xxxxxxxxxxxx"
     api_client = AiApiRequest(base_url="https://api.deepseek.com")
 
     # ---------------- 接口地址两种传入方式说明 ----------------
-    # 方式一：初始化时传入base_url，send_post仅填写接口短路径（推荐，统一管理域名）
+    # 方式一：初始化时传入 base_url，send_post 仅填写接口短路径（推荐，统一管理域名）
     chat_path = "/v1/chat/completions"
-    # 方式二：初始化不填base_url，send_post传入完整接口地址
+    # 方式二：初始化不填 base_url，send_post 传入完整接口地址
     # chat_path = "https://api.deepseek.com/v1/chat/completions"
 
     # 2. 构造AI对话请求参数
@@ -41,7 +38,7 @@ if __name__ == "__main__":
     }
     # 3. 发起请求，接收统一格式返回结果
     res = api_client.send_post(api_path=chat_path, request_data=chat_params)
-    # 4. 自动化测试判断逻辑：根据返回code校验请求是否成功
+    # 4. 自动化测试判断逻辑：根据返回 code 校验请求是否成功
     if res["code"] == 0:
         print("接口调用成功，模型返回内容：")
         print(res["data"]["choices"][0]["message"]["content"])
