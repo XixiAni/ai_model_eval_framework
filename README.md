@@ -27,7 +27,7 @@ AI_API_KEY=sk-DeepSeek密钥
  
 ```bash
 python main.py
-``` 
+```
  
 4. 查看结果
  
@@ -288,7 +288,7 @@ case_list:
     "assert_result": bool,
     "assert_msg": str
 }
-``` 
+```
  
 
 ## 8 💡 关键设计思路说明
